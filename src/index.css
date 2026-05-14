@@ -1,0 +1,29 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary: #6c63ff;
+  --primary-light: #ede9ff;
+  --danger: #ff5c5c;
+  --success: #4caf50;
+  --text-dark: #1a1a2e;
+  --text-mid: #555577;
+  --text-light: #9999bb;
+  --bg: #f4f4fb;
+  --white: #ffffff;
+  --border: #e0e0f0;
+  --shadow: 0 2px 12px rgba(108, 99, 255, 0.08);
+  --radius: 10px;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg);
+  color: var(--text-dark);
+  min-height: 100vh;
+}
