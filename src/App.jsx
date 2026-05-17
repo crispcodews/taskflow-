@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Header from "./components/Header";
+import TaskForm from "./components/TaskForm";
+import TaskList from "./components/TaskList";
 import "./App.css";
 
 function App() {
@@ -35,10 +37,47 @@ function App() {
 
   const completedTasks = tasks.filter((t) => t.completed).length;
 
+  function addTask({ title, priority, dueDate }) {
+    const newTask = {
+      id: Date.now(),
+      title,
+      priority,
+      dueDate,
+      completed: false,
+      createdAt: Date.now(),
+    };
+    setTasks([newTask, ...tasks]);
+  }
+
+  function deleteTask(id) {
+    setTasks(tasks.filter((task) => task.id !== id));
+  }
+
+  function toggleComplete(id) {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
+  }
+
+  function editTask(id, updatedData) {
+    setTasks(
+      tasks.map((task) => (task.id === id ? { ...task, ...updatedData } : task))
+    );
+  }
+
   return (
     <div className="app-container">
       <Header totalTasks={tasks.length} completedTasks={completedTasks} />
-      <p>Tasks in state: {tasks.length}</p>
+      <TaskForm onAddTask={addTask} />
+      <TaskList tasks={tasks} onDelete={deleteTask} />
+      <TaskList
+        tasks={tasks}
+        onDelete={deleteTask}
+        onToggle={toggleComplete}
+        onEdit={editTask}
+      />
     </div>
   );
 }
