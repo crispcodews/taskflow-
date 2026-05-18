@@ -5,7 +5,6 @@
   box-shadow: var(--shadow);
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 12px;
   transition: opacity 0.2s;
 }
@@ -19,10 +18,19 @@
   color: var(--text-light);
 }
 
+.task-item-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
 .task-item-main {
+  flex: 1;
   display: flex;
   flex-direction: coloumn;
-  gap: 6px;
+  gap: 4px;
 }
 
 .task-item-title {
@@ -38,16 +46,99 @@
   color: var(--text-mid);
 }
 
+.task-item-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.task-item-edit,
 .task-item-delete {
   background: none;
   border: none;
-  font-size: 1.1rem;
+  font-size: 1rem;
   cursor: pointer;
   opacity: 0.4;
   transition: opacity 0.2s;
   padding: 4px;
 }
 
+.task-item-edit:hover,
 .task-item-delete:hover {
   opacity: 1;
+}
+
+/* Edit mode */
+.task-item-editing {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.task-item-edit-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task-item-edit-input {
+  padding: 8px 12px;
+  border: 2px solid var(--primary);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  color: var(--text-dark);
+  outline: none;
+  width: 100%;
+}
+
+.task-item-edit-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.task-item-edit-select,
+.task-item-edit-date {
+  padding: 6px 10px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  background: var(--bg);
+  outline: none;
+}
+
+.task-item-edit-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.task-item-save {
+  padding: 6px 18px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.task-item-save:hover {
+  opacity: 0.88;
+}
+
+.task-item-cancel {
+  padding: 6px 18px;
+  background: none;
+  color: var(--text-mid);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.task-item-cancel:hover {
+  border-color: var(--text-mid);
 }
