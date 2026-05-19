@@ -71,7 +71,6 @@ function App() {
     <div className="app-container">
       <Header totalTasks={tasks.length} completedTasks={completedTasks} />
       <TaskForm onAddTask={addTask} />
-      <TaskList tasks={tasks} onDelete={deleteTask} />
       <TaskList
         tasks={tasks}
         onDelete={deleteTask}

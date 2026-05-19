@@ -18,7 +18,7 @@ function TaskForm({ onAddTask }) {
   }
 
   return (
-    <div className="task-form">
+    <form className="task-form" onSubmit={handleSubmit}>
       <input
         className="task-form-input"
         type="text"
@@ -42,11 +42,11 @@ function TaskForm({ onAddTask }) {
           value={dueDate}
           onChange={(e) => setDueDate(e.target.value)}
         />
-        <button className="task-form-btn" onClick={handleSubmit}>
+        <button className="task-form-btn" type="submit">
           + Add Task
         </button>
       </div>
-    </div>
+    </form>
   );
 }
 

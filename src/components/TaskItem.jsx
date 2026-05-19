@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/TaskItem.css";
 
 function TaskItem({ task, onDelete, onToggle, onEdit }) {
@@ -6,6 +6,12 @@ function TaskItem({ task, onDelete, onToggle, onEdit }) {
   const [editTitle, setEditTitle] = useState(task.title);
   const [editPriority, setEditPriority] = useState(task.priority);
   const [editDueDate, setEditDueDate] = useState(task.dueDate);
+
+  useEffect(() => {
+    setEditTitle(task.title);
+    setEditPriority(task.priority);
+    setEditDueDate(task.dueDate);
+  }, [task])
 
   const priorityLabel = {
     low: "🟢 Low",
@@ -78,7 +84,7 @@ function TaskItem({ task, onDelete, onToggle, onEdit }) {
         onChange={() => onToggle(task.id)}
       />
 
-      <div className="taask-item-main">
+      <div className="task-item-main">
         <span className="task-item-title">{task.title}</span>
         <div className="task-item-meta">
           <span className="task-item-priority">
