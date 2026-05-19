@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "./components/Header";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
+import FilterBar from "./components/FilterBar";
 import "./App.css";
 
 function App() {
@@ -67,12 +68,28 @@ function App() {
     );
   }
 
+  const filteredTasks = tasks
+    .filter((task) => {
+      if (filter === "active") return !task.completed;
+      if (filter === "completed") return task.completed;
+      return true;
+    })
+    .filter((task) =>
+      task.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
   return (
     <div className="app-container">
       <Header totalTasks={tasks.length} completedTasks={completedTasks} />
       <TaskForm onAddTask={addTask} />
+      <FilterBar
+        filter={filter}
+        onFilterChange={setFilter}
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+      />
       <TaskList
-        tasks={tasks}
+        tasks={filteredTasks}
         onDelete={deleteTask}
         onToggle={toggleComplete}
         onEdit={editTask}
