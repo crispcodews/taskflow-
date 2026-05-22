@@ -1,12 +1,25 @@
-.task-list {
+.task-list-empty {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  gap: 8px;
+  padding: 60px 0;
+  color: var(--text-light);
+  animation: fadeIn 0.3s ease;
 }
 
-.task-list-empty {
-  text-align: center;
-  color: var(--text-light);
-  padding: 40px 0;
-  font-size: 1rem;
+.task-list-empty-icon {
+  font-size: 2.5rem;
+  color: var(--primary);
+  opacity: 0.3;
+}
+
+.task-list-empty p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-mid);
+}
+
+.task-list-empty span {
+  font-size: 0.9rem;
 }

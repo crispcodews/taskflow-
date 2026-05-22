@@ -7,6 +7,19 @@
   align-items: center;
   gap: 12px;
   transition: opacity 0.2s;
+  animation: fadeInDown 0.2s ease;
+}
+
+.task-item-priority-high {
+  border-left: 4px solid #ff5c5c;
+}
+
+.task-item-priority-medium {
+  border-left: 4px solid #f5a623;
+}
+
+.task-item-priority-low {
+  border-left: 4px solid #4caf50;
 }
 
 .task-item-completed {

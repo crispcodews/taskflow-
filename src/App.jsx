@@ -1,40 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
 import FilterBar from "./components/FilterBar";
+import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Build TaskFlow UI",
-      completed: false,
-      priority: "high",
-      dueDate: "2026-05-20",
-      createdAt: Date.now(),
-    },
-    {
-      id: 2,
-      title: "Set up data layer",
-      completed: true,
-      priority: "medium",
-      dueDate: "2026-05-13",
-      createdAt: Date.now(),
-    },
-    {
-      id: 3,
-      title: "Write README",
-      completed: false,
-      priority: "low",
-      dueDate: "",
-      createdAt: Date.now(),
-    },
-  ]);
+  const [tasks, setTasks] = useState(() => {
+    const saved = localStorage.getItem("taskflow-tasks");
+    return saved ? JSON.parse(saved) : [];
+  });
 
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState("all");
+
+  useEffect(() => {
+    localStorage.setItem("taskflow-tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   const completedTasks = tasks.filter((t) => t.completed).length;
 
@@ -94,6 +77,7 @@ function App() {
         onToggle={toggleComplete}
         onEdit={editTask}
       />
+      <Footer />
     </div>
   );
 }

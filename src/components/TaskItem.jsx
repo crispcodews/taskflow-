@@ -76,7 +76,7 @@ function TaskItem({ task, onDelete, onToggle, onEdit }) {
   }
 
   return (
-    <div className={`task-item ${task.completed ? "task-item-completed" : ""}`}>
+    <div className={`task-item ${task.completed ? "task-item-completed" : ''} task-item-priority-${task.priority}`}>
       <input
         className="task-item-checkbox"
         type="checkbox"
