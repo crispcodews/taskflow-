@@ -1,17 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "../styles/TaskItem.css";
 
 function TaskItem({ task, onDelete, onToggle, onEdit }) {
-  const [isEditing, setIsEdititng] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [editTitle, setEditTitle] = useState(task.title);
   const [editPriority, setEditPriority] = useState(task.priority);
   const [editDueDate, setEditDueDate] = useState(task.dueDate);
 
-  useEffect(() => {
-    setEditTitle(task.title);
-    setEditPriority(task.priority);
-    setEditDueDate(task.dueDate);
-  }, [task])
 
   const priorityLabel = {
     low: "🟢 Low",
@@ -26,14 +21,14 @@ function TaskItem({ task, onDelete, onToggle, onEdit }) {
       priority: editPriority,
       dueDate: editDueDate,
     });
-    setIsEdititng(false);
+    setIsEditing(false);
   }
 
   function handleCancel() {
     setEditTitle(task.title);
     setEditPriority(task.priority);
     setEditDueDate(task.dueDate);
-    setIsEdititng(false);
+    setIsEditing(false);
   }
 
   if (isEditing) {
@@ -96,10 +91,10 @@ function TaskItem({ task, onDelete, onToggle, onEdit }) {
         </div>
       </div>
       <div className="task-item-actions">
-        <button className="task-item-edit" onClick={() => setIsEdititng(true)}>
+        <button className="task-item-edit" onClick={() => setIsEditing(true)}>
           ✏️
         </button>
-        <button classname="task-item-delete" onClick={() => onDelete(task.id)}>
+        <button className="task-item-delete" onClick={() => onDelete(task.id)}>
           🗑
         </button>
       </div>
