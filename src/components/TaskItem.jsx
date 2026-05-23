@@ -2,18 +2,24 @@ import { useState } from "react";
 import "../styles/TaskItem.css";
 
 function TaskItem({ task, onDelete, onToggle, onEdit }) {
+  // Local state for edit mode
   const [isEditing, setIsEditing] = useState(false);
+
+  // Local copies of task fields used while editing
   const [editTitle, setEditTitle] = useState(task.title);
   const [editPriority, setEditPriority] = useState(task.priority);
   const [editDueDate, setEditDueDate] = useState(task.dueDate);
 
-
+  // Maps priority value to a readable emoji label
   const priorityLabel = {
     low: "🟢 Low",
     medium: "🟡 Medium",
     high: "🔴 High",
   };
 
+  /* handleSave - Validates and saves the edited task.
+  Calls onEdit with the updated fields, then exits edit mode.
+   */
   function handleSave() {
     if (!editTitle.trim()) return;
     onEdit(task.id, {
@@ -24,6 +30,8 @@ function TaskItem({ task, onDelete, onToggle, onEdit }) {
     setIsEditing(false);
   }
 
+  /* handleCancel - Discards edits and resets local state back to original task values.
+   */
   function handleCancel() {
     setEditTitle(task.title);
     setEditPriority(task.priority);
@@ -31,6 +39,7 @@ function TaskItem({ task, onDelete, onToggle, onEdit }) {
     setIsEditing(false);
   }
 
+  // Render the edit mode UI when isEditing is true
   if (isEditing) {
     return (
       <div className="task-item task-item-editing">
@@ -70,8 +79,14 @@ function TaskItem({ task, onDelete, onToggle, onEdit }) {
     );
   }
 
+  // Default view - normal task card
   return (
-    <div className={`task-item ${task.completed ? "task-item-completed" : ''} task-item-priority-${task.priority}`}>
+    <div
+      className={`task-item ${
+        task.completed ? "task-item-completed" : ""
+      } task-item-priority-${task.priority}`}
+    >
+      {/* Checkbox toggles the completed status */}
       <input
         className="task-item-checkbox"
         type="checkbox"
@@ -85,6 +100,7 @@ function TaskItem({ task, onDelete, onToggle, onEdit }) {
           <span className="task-item-priority">
             {priorityLabel[task.priority]}
           </span>
+          {/* Only render due date if one ws set */}
           {task.dueDate && (
             <span className="task-item-due">📅 {task.dueDate}</span>
           )}
